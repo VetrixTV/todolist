@@ -1,4 +1,6 @@
-from flask import Flask
+from uuid import uuid4
+
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -24,11 +26,33 @@ def getTodolist(list_id):
     except ValueError:
         return "THAT LIST WAS NOT FOUND!"
     entrys = []
+    # TODO: fix the search, this is just slow itself
     for entry in list_entries:
         if entry["list_id"] == list_id:
             entrys.append(entry)
     return entrys.__str__()
 
+
+@app.route('/todo-list/<list_id>/entry', methods=['PUT'])
+def addEntry(list_id):
+    try:
+        todo_list.index(list_id)
+    except ValueError:
+        return '', 404
+    data = request.get_json()
+    try:
+        data['name']
+        data['description']
+    except KeyError:
+        return 'missing data', 404
+    entry = {'id': uuid4(),
+             'name': data['name'],
+             'description': data['description'],
+             'user_id': '0',
+             'list_id': list_id
+             }
+    list_entries.append(entry)
+    return '', 200
 
 
 @app.route('/todo-list/<list_id>', methods=['DELETE'])
