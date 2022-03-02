@@ -28,15 +28,13 @@ paths:
       operationId: "getTodoList"
       consumes:
         - "application/json"
-        - "application/xml"
       produces:
-        - "application/xml"
         - "application/json"
       parameters:
         - in: "path"
           name: "list_id"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
@@ -48,13 +46,12 @@ paths:
       summary: "Löscht die Liste mit einer angegebenen ID"
       operationId: "deleteTodoList"
       produces:
-        - "application/xml"
         - "application/json"
       parameters:
         - name: "list_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
@@ -67,7 +64,6 @@ paths:
       summary: "Fügt eine neue Todo-Liste hinzu"
       operationId: "addTodoList"
       consumes:
-        - "application/xml"
         - "application/json"
       responses:
         "200":
@@ -81,13 +77,12 @@ paths:
       summary: "Fügt einen Eintrag zu einer bestehenden Todo-Liste hinzu"
       operationId: "addEntryToTodoList"
       consumes:
-        - "application/xml"
         - "application/json"
       parameters:
         - name: "list_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
@@ -100,17 +95,16 @@ paths:
       summary: "Aktualisiert einen Eintrag aus einer bestehenden Todo-Liste"
       operationId: "updateEntryFromTodoList"
       consumes:
-        - "application/xml"
         - "application/json"
       parameters:
         - name: "list_id"
           in: "path"
+          type: string
           required: true
-          type: "integer"
         - name: "entry_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
@@ -122,17 +116,16 @@ paths:
       summary: "Löscht einen Eintrag aus einer bestehenden Todo-Liste"
       operationId: "deleteEntryFromTodoList"
       consumes:
-        - "application/xml"
         - "application/json"
       parameters:
         - name: "list_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
         - name: "entry_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
@@ -145,7 +138,6 @@ paths:
       summary: "Liefert eine Liste aller Nutzer"
       operationId: "getUsers"
       produces:
-        - "application/xml"
         - "application/json"
       responses:
         "200":
@@ -159,7 +151,6 @@ paths:
       operationId: "createUser"
       consumes:
         - "application/json"
-        - "application/xml"
       responses:
         "200":
           description: "successful operation"
@@ -172,13 +163,12 @@ paths:
       summary: "Löscht einen Nutzer"
       operationId: "deleteUser"
       consumes:
-        - "application/xml"
         - "application/json"
       parameters:
         - name: "user_id"
           in: "path"
           required: true
-          type: "integer"
+          type: string
       responses:
         "200":
           description: "successful operation"
