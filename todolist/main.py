@@ -62,7 +62,7 @@ def addEntry(list_id):
         data['description']
     except KeyError:
         return 'missing data', 404
-    entry = {'id': uuid4(),
+    entry = {'id': uuid4().__str__(),
              'name': data['name'],
              'description': data['description'],
              'user': '0',
@@ -92,7 +92,7 @@ def createTodolist():
         data['name']
     except KeyError:
         return 'missing data', 404
-    todo_list = {'id': uuid4(),
+    todo_list = {'id': uuid4().__str__(),
                  'name': data['name'],
                  }
     todo_lists.append(todo_list)
@@ -110,11 +110,12 @@ def updateEntry(list_id, entry_id):
     except KeyError:
         return 'missing data', 404
     for entry in todos:
-        if entry["list"] == list_id:
-            entry['name'] = data['name']
-            entry['description'] = data['description']
-            todos.insert(todos.index(entry), entry)
-            return entry, 200
+        if entry['id'] == entry_id:
+            if entry["list"] == list_id:
+                entry['name'] = data['name']
+                entry['description'] = data['description']
+                todos.insert(todos.index(entry), entry)
+                return entry, 200
     return 'entry not found', 404
 
 
