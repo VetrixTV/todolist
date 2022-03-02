@@ -4,7 +4,6 @@ WORKDIR /app
 
 ADD todolist /app
 
-
 RUN pip install -r requirements.txt
 
 USER user

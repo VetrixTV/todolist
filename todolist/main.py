@@ -1,19 +1,20 @@
+import json
 from uuid import uuid4
 
 from flask import Flask, request
 
 app = Flask(__name__)
 
-user_id_bob = uuid4()
-user_id_alice = uuid4()
-user_id_eve = uuid4()
+user_id_bob = uuid4().__str__()
+user_id_alice = uuid4().__str__()
+user_id_eve = uuid4().__str__()
 todo_list_1_id = '1318d3d1-d979-47e1-a225-dab1751dbe75'
 todo_list_2_id = '3062dc25-6b80-4315-bb1d-a7c86b014c65'
 todo_list_3_id = '44b02e00-03bc-451d-8d01-0c67ea866fee'
-todo_1_id = uuid4()
-todo_2_id = uuid4()
-todo_3_id = uuid4()
-todo_4_id = uuid4()
+todo_1_id = uuid4().__str__()
+todo_2_id = uuid4().__str__()
+todo_3_id = uuid4().__str__()
+todo_4_id = uuid4().__str__()
 
 # define internal data structures with example data
 user_list = [
@@ -74,15 +75,15 @@ def addEntry(list_id):
 
 @app.route('/todo-list/<list_id>', methods=['DELETE'])
 def deleteTodolist(list_id):
-    try:
-        for list in todo_lists:
-            if list['id'] == list_id:
-                index = todo_lists.index(list)
-                break
-    except ValueError:
-        return '', 404
-    todo_lists.pop(index)
-    return '', 200
+    index = None
+    for list in todo_lists:
+        if list['id'] == list_id:
+            index = todo_lists.index(list)
+            break
+    if index != None:
+        todo_lists.pop(index)
+        return '', 200
+    return '', 404
 
 
 @app.route('/todo-list', methods=['POST'])
@@ -117,6 +118,39 @@ def updateEntry(list_id, entry_id):
                 todos.insert(todos.index(entry), entry)
                 return entry, 200
     return 'entry not found', 404
+
+
+@app.route('/user', methods=['GET'])
+def getAllUsers():
+    return json.loads(json.dumps(user_list.__str__())), 200
+
+
+@app.route('/user', methods=['POST'])
+def createUser():
+    data = request.get_json()
+    try:
+        data['name']
+    except KeyError:
+        return 'missing data', 404
+    user = {
+        'id': uuid4().__str__(),
+        'name': data['name']
+    }
+    user_list.append(user)
+    return user
+
+
+@app.route('/user/<user_id>', methods=['DELETE'])
+def deleteUser(user_id):
+    index = None
+    for user in user_list:
+        if user['id'] == user_id:
+            index = user_list.index(user)
+            break
+    if index != None:
+        user_list.pop(index)
+        return '', 200
+    return '', 404
 
 
 if __name__ == '__main__':
