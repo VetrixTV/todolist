@@ -1,14 +1,14 @@
-version: 3
+version: "3.7"
 services:
-  maria:
-    container_name: maria
-    image: mariadb:10.5
-    environment:
-      MARIADB_ROOT_PASSWORD: maria
+  backend:
+    build:
+      dockerfile: Dockerfile
     ports:
-      - 3306:3306
-    volumes:
-      - maria_db:/var/lib/mysql
+      - "5000:5000"
 
-volumes:
-  maria_db:
+  web:
+    image: nginx:stable
+    ports:
+      - "80:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
