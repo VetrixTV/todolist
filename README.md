@@ -22,7 +22,7 @@ $ docker-compose up  -d
 
 Install the Library`s
 ```bash
-pip install -r ./todolist/requirements.txt
+$ pip install -r ./todolist/requirements.txt
 ```
 
 Start the app
