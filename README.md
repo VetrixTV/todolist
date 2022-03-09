@@ -1,6 +1,6 @@
 # Todolist
 
-[TOC]
+__TOC__
 
 ## How to use it
 
