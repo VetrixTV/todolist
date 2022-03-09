@@ -29,3 +29,7 @@ Start the app
 ```bash
 $ python ./todolist/main.py
 ```
+
+### Contribution
+
+- VetrixTV(Wilhelm Adam)
