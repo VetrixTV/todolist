@@ -36,6 +36,11 @@ todos = [
 
 
 def listExists(list_id):
+    """
+    Checks if the given list_id exists
+    :param list_id: the list_id
+    :return: True if the list exists, False if not
+    """
     for list in todo_lists:
         if list['id'] == list_id:
             return True
@@ -44,6 +49,11 @@ def listExists(list_id):
 
 @app.route('/todo-list/<list_id>', methods=['GET'])
 def getTodolist(list_id):
+    """
+    Gets a todolist based on the given list_id
+    :param list_id: the list_id of the list you want
+    :return: a List with all its entrys
+    """
     if not listExists(list_id):
         return 'list does not exists', 404
     entrys = []
@@ -55,6 +65,15 @@ def getTodolist(list_id):
 
 @app.route('/todo-list/<list_id>/entry', methods=['PUT'])
 def addEntry(list_id):
+    """
+    Adds the given entry to the given list
+    {
+        "name": "Entry01",
+        "description": "Buy sand"
+    }
+    :param list_id: the list_id if the list
+    :return: the added entry with all its data
+    """
     if not listExists(list_id):
         return 'list does not exists', 404
     data = request.get_json()
@@ -75,6 +94,11 @@ def addEntry(list_id):
 
 @app.route('/todo-list/<list_id>', methods=['DELETE'])
 def deleteTodolist(list_id):
+    """
+    Deletes a todolist based on the list_id
+    :param list_id: of the list you want to delete
+    :return: 200 if the deleting was successful and 404 if not
+    """
     index = None
     for list in todo_lists:
         if list['id'] == list_id:
@@ -88,6 +112,13 @@ def deleteTodolist(list_id):
 
 @app.route('/todo-list', methods=['POST'])
 def createTodolist():
+    """
+    creates a todolist with the params in the body
+    {
+        "name": "The cool list"
+    }
+    :return: the created list
+    """
     data = request.get_json()
     try:
         data['name']
@@ -102,6 +133,16 @@ def createTodolist():
 
 @app.route('/todo-list/<list_id>/<entry_id>', methods=['PUT'])
 def updateEntry(list_id, entry_id):
+    """
+    Updates a entry of a list, based on the data in the body
+    {
+        "name": "Entry 031314-Updated",
+        "description": "Test Documentation"
+    }
+    :param list_id: of the list where the entry is in
+    :param entry_id: the id of the entry
+    :return: the changed entry, if it fails it returns 404 and entry not found
+    """
     if not listExists(list_id):
         return 'list does not exists', 404
     data = request.get_json()
@@ -122,11 +163,22 @@ def updateEntry(list_id, entry_id):
 
 @app.route('/user', methods=['GET'])
 def getAllUsers():
+    """
+    returns all the user
+    :return: a list of all users
+    """
     return json.loads(json.dumps(user_list.__str__())), 200
 
 
 @app.route('/user', methods=['POST'])
 def createUser():
+    """
+    Creates a User based on the params in the body
+    {
+        "name": "Peter"
+    }
+    :return: the created user
+    """
     data = request.get_json()
     try:
         data['name']
@@ -142,6 +194,11 @@ def createUser():
 
 @app.route('/user/<user_id>', methods=['DELETE'])
 def deleteUser(user_id):
+    """
+    deletes the user based on the id
+    :param user_id: id of the user
+    :return: 200 if the user was found and deleted, 404 if the user was not found and not deleted
+    """
     index = None
     for user in user_list:
         if user['id'] == user_id:
