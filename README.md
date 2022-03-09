@@ -1,7 +1,5 @@
 # Todolist
 
-__TOC__
-
 ## How to use it
 
 ### Requirements
