@@ -29,7 +29,7 @@ todo_lists = [
 ]
 todos = [
     {'id': todo_1_id, 'name': 'Milch', 'description': '', 'list': todo_list_1_id, 'user': user_id_bob},
-    {'id': todo_2_id, 'name': 'Arbeitsblätter ausdrucken', 'description': '', 'list': todo_list_2_id, 'user': user_id_alice},
+    {'id': todo_2_id, 'name': 'Arbeitsblaetter ausdrucken', 'description': '', 'list': todo_list_2_id, 'user': user_id_alice},
     {'id': todo_3_id, 'name': 'Kinokarten kaufen', 'description': '', 'list': todo_list_3_id, 'user': user_id_eve},
     {'id': todo_3_id, 'name': 'Eier', 'description': '', 'list': todo_list_1_id, 'user': user_id_eve},
 ]
